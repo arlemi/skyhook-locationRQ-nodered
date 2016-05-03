@@ -1,0 +1,86 @@
+<!--
+  Copyright 2016 IBM Corp.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/javascript">
+    RED.nodes.registerType('skyhook-locationrq', {
+            category: 'Skyhook',
+            defaults: { 
+                name: {value: ""},
+                mode: {value: "single-ap"},
+            },
+            color: "rgb(99, 158, 230)",
+            inputs: 1,
+            outputs: 1,
+            icon: "dialog-icon25x25.png",
+            paletteLabel: "LocationRQ",
+            label: function() {
+                return this.name || "LocationRQ";
+            },
+            credentials: {
+              username: {type:"text"},
+              password: {type:"password"}
+            }
+        });
+</script>
+
+
+
+<script type="text/x-red" data-template-name="skyhook-locationrq">
+	<div class="form-row">
+		<label for="node-input-name"> <i class="icon-tag"> </i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name"/>
+	</div>
+    <div class="form-row credentials">
+        <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-input-username" placeholder="Username">
+    </div>
+    <div class="form-row credentials">
+        <label for="node-input-password"><i class="fa fa-key"></i> Key ID</label>
+        <input type="password" id="node-input-password" placeholder="Password">
+    </div>	
+    <div class="form-row">
+        <label for="node-input-mode"><i class="fa fa-question"></i> Mode</label>
+        <select type="text" id="node-input-mode" style="display: inline-block; width: 70%;" >
+            <option value="single-ap">LocationRQ with single AP</option>
+            <option value="multi-aps">LocationRQ with multiple APs</option>
+            <option value="ltecell-aps">LocationRQ with LTE Cell and APs</option>
+            <option value="aps-cell">LocationRQ with APs and Cellular</option>
+            <option value="aps-cell-gps">LocationRQ with APs, Cell and GPS</option>	
+        </select>
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="skyhook-locationrq">
+    <p>Geolocation and IoT go hand-in-hand.  Knowing the location of your devices helps to accomplish many important objectives including optimizing routes or traffic flow, reducing theft, streamlining asset management, and enhancing safety.</p>
+
+    <p>The TrueFix® location platform enables you to accomplish these objectives via a simple Location API that can location-enable any device.  Location capabilities include Wi-Fi, GPS, and Cell ID if the device in question supports the respective capabilities.  TrueFix can locate any mobile phone, IoT device, or sensor with Wi-Fi capabilities, or the ability to pair with another device that has Wi-Fi capabilities.  The Wi-Fi location method is advantageous for IoT devices as Wi-Fi modules are typically lower in cost than GPS modules, require less battery resources from the device, and can locate items in GPS-denied environments such as urban canyons or indoors.</p>
+
+    <p>Location Process</p>
+    <p></p>
+    <p>The device collects information from all of the Wi-Fi Access Points (APs), cellular, and GPS sources within range</p>
+    <ul>
+        <li>Wi-Fi information collected includes: SSID, MAC Address and Signal Strength</li>
+        <li>Communication with the Wi-Fi APs is not required</li>
+        <li>Devices in urban areas typically receive information from greater than 40 Wi-Fi APs </li>
+    <p>The requesting cloud application (such as IBM BlueMix), using Skyhook/TruePosition's Location API, sends XMV over HTTPs with the collected information to the TrueFix cloud servers.</p>
+    <p>TrueFix calculates the location of the device based on the scan information compared against the information in the Skyhook database.</p>
+    <p>TrueFix returns the device's location back to the requesting cloud application</p>
+
+    <p>For more information about the LocationRQ service, 
+	read the <a href="http://projects.tmforum.org/wiki/pages/viewpage.action?pageId=62949339">documentation</a>.</p>
+	
+</script>
+

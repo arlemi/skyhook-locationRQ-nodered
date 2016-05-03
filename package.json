@@ -1,0 +1,25 @@
+{
+    "name": "node-red-node-skyhook",
+    "version": "0.1",
+    "description": "A set of nodes for interacting with the Skyhook LocationRQ APIs",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/arlemi/skyhook-locationRQ-nodered.git"
+    },
+    "keywords": [
+        "node-red",
+        "skyhook",
+        "locationRQ"
+    ],
+    "node-red": {
+        "nodes": {
+            "locationRQ": "skyhook/locationrq.js"
+        }
+    },
+    "contributors": [
+        "Arlemi Turpault <aturpaul@fr.ibm.com>"
+    ],
+    "dependencies": {
+        "request": "2.69.*"
+    }
+}
