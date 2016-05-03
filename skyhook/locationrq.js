@@ -6,7 +6,7 @@ module.exports = function (RED) {
 
   var request = require('request');
 
-  function LocationQRNode (config) {
+  function LocationRQNode (config) {
     RED.nodes.createNode(this, config);
     var node = this;
    
@@ -22,24 +22,23 @@ module.exports = function (RED) {
 			 return;
       }
 
-      var username = sUsername || this.credentials.username;
-      var password = sPassword || this.credentials.password;
+      var username = this.credentials.username;
+      var password = this.credentials.password;
       this.status({});  
 			
       if (!username || !password) {
         this.status({fill:'red', shape:'ring', text:'missing credentials'});  
-        message = 'Missing Watson Dialog service credentials';
+        message = 'Missing LocationRQ service credentials';
         this.error(message, msg);
         return;
       } 
 
-      /*var dialog = watson.dialog({
-        username: username,
-        password: password,
-        version: 'v1'
-      });	  
-
-      var params = {};
+      $.post( 'https://tfdemo-lg.trueposition.com:8443/wps2/location', { body: msg.payload }).done(function( data ) {
+        msg.dialog = data; 
+        msg.payload = 'Check msg.dialog dialog data';
+        node.send(msg);  
+      });
+      /*var params = {};
       if (config.mode === 'create') {
         performCreate(node,dialog,msg);
       }
@@ -88,7 +87,7 @@ module.exports = function (RED) {
   
   //Register the node as service-dialog to nodeRED 
   RED.nodes.registerType('skyhook-locationrq', 
-                         LocationQRNode, 
+                         LocationRQNode, 
                          {credentials: { username: {type:'text'},
                                          password: {type:'password'}
                                        }
