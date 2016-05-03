@@ -5,11 +5,6 @@
 module.exports = function (RED) {
 
   var request = require('request');
-  var cfenv = require('cfenv');
-  var fs = require('fs');
-  var temp = require('temp');
-  var async = require('async');
-  temp.track();
 
   function LocationQRNode (config) {
     RED.nodes.createNode(this, config);
@@ -74,7 +69,7 @@ module.exports = function (RED) {
   }
 
   // This function performs the operation to fetch a list of all dialog templates
-  function performList(node,dialog,msg) {
+  /*function performList(node,dialog,msg) {
   
   node.status({fill:'blue', shape:'dot', text:'requesting list of dialogs'});	    
 	dialog.getDialogs({}, function(err, dialogs){
@@ -88,7 +83,7 @@ module.exports = function (RED) {
         node.send(msg);
       }		  
     });
-  }		
+  }*/		
 
   
   //Register the node as service-dialog to nodeRED 
