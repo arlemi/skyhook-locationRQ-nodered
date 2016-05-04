@@ -1,5 +1,5 @@
 {
-    "name": "node-red-node-skyhook",
+    "name": "node-red-contrib-skyhook",
     "version": "0.1.0",
     "description": "A set of nodes for interacting with the Skyhook LocationRQ APIs",
     "repository": {
