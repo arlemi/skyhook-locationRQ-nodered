@@ -33,57 +33,27 @@ module.exports = function (RED) {
         return;
       } 
 
-      $.post( 'https://tfdemo-lg.trueposition.com:8443/wps2/location', { body: msg.payload }).done(function( data ) {
-        msg.dialog = data; 
-        msg.payload = 'Check msg.dialog dialog data';
-        node.send(msg);  
-      });
-      /*var params = {};
-      if (config.mode === 'create') {
-        performCreate(node,dialog,msg);
-      }
-      else if (config.mode === 'delete') {
-        performDelete(node,dialog,msg,config);
-      }
-      else if (config.mode === 'deleteall') {
-        performDeleteAll(node,dialog,msg,config);
-      }
-       else if (config.mode === 'list') {
-        performList(node,dialog,msg);
-      } else {
-            node.status({fill:'blue', shape:'dot', text:'Requesting dialog profile variables'});
-            dialog.getProfile (params, function (err, dialog_data) {
-              node.status({});
-              if (err) {
-                node.status({fill:'red', shape:'ring', text:'call to dialog service failed'}); 
-                node.error(err, msg);
-              } else {
-                msg.dialog = dialog_data;		  
-                msg.payload = 'Check msg.dialog dialog data';
-                node.send(msg);
-              }  
-            });
-         }*/			  	  
+      console.log(msg.payload);
+      this.status({fill:'blue', shape:'ring', text:'requesting'});
+      request.post({
+        headers: {'content-type' : 'text/xml'},
+        url:     'https://tfdemo-lg.trueposition.com:8443/wps2/location',
+        body:    msg.payload
+      }, function(error, response, body){
+        if(error) {
+          console.log('error', error);
+          msg.payload = 'Error: ' + error;
+          node.send(msg);
+          node.status({fill:'red', shape:'ring', text:'request error'});
+        } else {
+          console.log('response', response.body);
+          msg.payload = response.body;
+          node.send(msg);
+          node.status({});
+        }
+      }); 	  
     });
   }
-
-  // This function performs the operation to fetch a list of all dialog templates
-  /*function performList(node,dialog,msg) {
-  
-  node.status({fill:'blue', shape:'dot', text:'requesting list of dialogs'});	    
-	dialog.getDialogs({}, function(err, dialogs){
-    node.status({});
-	  if (err) {
-        node.status({fill:'red', shape:'ring', text:'call to dialog service failed'});
-        node.error(err, msg);		
-      } else {
-        msg.dialog = dialogs;
-        msg.payload = 'Check msg.dialog for list of dialogs';
-        node.send(msg);
-      }		  
-    });
-  }*/		
-
   
   //Register the node as service-dialog to nodeRED 
   RED.nodes.registerType('skyhook-locationrq', 
