@@ -29,11 +29,20 @@ module.exports = function (RED) {
         return;
       } 
 
+      var listSSID = msg.payload;
+      var constrXML;
+      constrXML = '<?xml version="1.0" encoding="UTF-8"?><LocationRQ xmlns="http://trueposition.com/truefix" version="2.23" ><authentication version="2.2"><key key="'+ username +'" username ="'+ password +'"/></authentication>'
+      listSSID.forEach(function(val){
+        constrXML += '<access-point><mac>' + val.mac.replace(/:/g, '').toUpperCase() + '</mac><signal-strength>' + val.signal_level + '</signal-strength></access-point>';
+      });
+      constrXML += "</LocationRQ>";
+
+
       this.status({fill:'blue', shape:'ring', text:'requesting'});
       request.post({
         headers: {'content-type' : 'text/xml'},
         url:     'https://tfdemo-lg.trueposition.com:8443/wps2/location',
-        body:    msg.payload
+        body:    constrXML
       }, function(error, response, body){
         if(error) {
           msg.payload = 'Error: ' + error;
