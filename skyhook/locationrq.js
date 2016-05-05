@@ -1,7 +1,3 @@
-/**
- * Copyright and License are going here
- **/
-
 module.exports = function (RED) {
 
   var request = require('request');
@@ -33,7 +29,6 @@ module.exports = function (RED) {
         return;
       } 
 
-      console.log(msg.payload);
       this.status({fill:'blue', shape:'ring', text:'requesting'});
       request.post({
         headers: {'content-type' : 'text/xml'},
@@ -41,12 +36,10 @@ module.exports = function (RED) {
         body:    msg.payload
       }, function(error, response, body){
         if(error) {
-          console.log('error', error);
           msg.payload = 'Error: ' + error;
           node.send(msg);
           node.status({fill:'red', shape:'ring', text:'request error'});
         } else {
-          console.log('response', response.body);
           msg.payload = response.body;
           node.send(msg);
           node.status({});
@@ -55,7 +48,7 @@ module.exports = function (RED) {
     });
   }
   
-  //Register the node as service-dialog to nodeRED 
+  //Register the node as skyhook-locationrq to nodeRED 
   RED.nodes.registerType('skyhook-locationrq', 
                          LocationRQNode, 
                          {credentials: { username: {type:'text'},
