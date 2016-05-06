@@ -10,7 +10,9 @@ module.exports = function (RED) {
 	
     this.on('input', function (msg) {
       this.log('skyhook-locationrq - Input received');
-		
+		  
+      console.log('this', this);
+
       var message = '';
       if (!msg.payload) {
 			 message = 'Missing property: msg.payload';
@@ -20,7 +22,10 @@ module.exports = function (RED) {
 
       var username = this.credentials.username;
       var password = this.credentials.password;
-      this.status({});  
+      this.status({}); 
+
+      console.log("username", username);
+      console.log("password", password); 
 			
       if (!username || !password) {
         this.status({fill:'red', shape:'ring', text:'missing credentials'});  
@@ -58,12 +63,7 @@ module.exports = function (RED) {
   }
   
   //Register the node as skyhook-locationrq to nodeRED 
-  RED.nodes.registerType('skyhook-locationrq', 
-                         LocationRQNode, 
-                         {credentials: { username: {type:'text'},
-                                         password: {type:'password'}
-                                       }
-                         });
+  RED.nodes.registerType('skyhook-locationrq',LocationRQNode);
 							
 };
 

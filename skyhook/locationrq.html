@@ -3,7 +3,8 @@
             category: 'Skyhook',
             defaults: { 
                 name: {value: ""},
-                mode: {value: "single-ap"},
+                user: {value: ""},
+                keyid: {value: ""}
             },
             color: "rgb(99, 158, 230)",
             inputs: 1,
@@ -12,10 +13,6 @@
             paletteLabel: "LocationRQ",
             label: function() {
                 return this.name || "LocationRQ";
-            },
-            credentials: {
-              username: {type:"text"},
-              password: {type:"password"}
             }
         });
 </script>
@@ -27,24 +24,14 @@
 		<label for="node-input-name"> <i class="icon-tag"> </i> Name</label>
 		<input type="text" id="node-input-name" placeholder="Name"/>
 	</div>
-    <div class="form-row credentials">
-        <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
-        <input type="text" id="node-input-username" placeholder="Username">
+    <div class="form-row">
+        <label for="node-input-user"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-input-user" placeholder="Username">
     </div>
-    <div class="form-row credentials">
-        <label for="node-input-password"><i class="fa fa-key"></i> Key ID</label>
-        <input type="password" id="node-input-password" placeholder="Password">
+    <div class="form-row">
+        <label for="node-input-keyid"><i class="fa fa-key"></i> Key ID</label>
+        <input type="text" id="node-input-keyid" placeholder="Key ID">
     </div>	
-    <!--<div class="form-row">
-        <label for="node-input-mode"><i class="fa fa-question"></i> Mode</label>
-        <select type="text" id="node-input-mode" style="display: inline-block; width: 70%;" >
-            <option value="single-ap">LocationRQ with single AP</option>
-            <option value="multi-aps">LocationRQ with multiple APs</option>
-            <option value="ltecell-aps">LocationRQ with LTE Cell and APs</option>
-            <option value="aps-cell">LocationRQ with APs and Cellular</option>
-            <option value="aps-cell-gps">LocationRQ with APs, Cell and GPS</option>	
-        </select>
-    </div>-->
 </script>
 
 <script type="text/x-red" data-help-name="skyhook-locationrq">
