@@ -31,7 +31,7 @@ module.exports = function (RED) {
 
       var listSSID = msg.payload;
       var constrXML;
-      constrXML = '<?xml version="1.0" encoding="UTF-8"?><LocationRQ xmlns="http://trueposition.com/truefix" version="2.23" ><authentication version="2.2"><key key="'+ username +'" username ="'+ password +'"/></authentication>'
+      constrXML = '<?xml version="1.0" encoding="UTF-8"?><LocationRQ xmlns="http://trueposition.com/truefix" version="2.23" ><authentication version="2.2"><key key="'+ password +'" username ="'+ username +'"/></authentication>'
       listSSID.forEach(function(val){
         constrXML += '<access-point><mac>' + val.mac.replace(/:/g, '').toUpperCase() + '</mac><signal-strength>' + val.signal_level + '</signal-strength></access-point>';
       });
