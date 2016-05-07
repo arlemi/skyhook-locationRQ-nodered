@@ -2,9 +2,7 @@
     RED.nodes.registerType('skyhook-locationrq', {
             category: 'Skyhook',
             defaults: { 
-                name: {value: ""},
-                user: {value: ""},
-                keyid: {value: ""}
+                name: {value: ""}
             },
             color: "rgb(99, 158, 230)",
             inputs: 1,
@@ -13,6 +11,10 @@
             paletteLabel: "LocationRQ",
             label: function() {
                 return this.name || "LocationRQ";
+            },
+            credentials: {
+              username: {type:"text"},
+              password: {type:"text"}
             }
         });
 </script>
@@ -24,13 +26,13 @@
 		<label for="node-input-name"> <i class="icon-tag"> </i> Name</label>
 		<input type="text" id="node-input-name" placeholder="Name"/>
 	</div>
-    <div class="form-row">
-        <label for="node-input-user"><i class="fa fa-user"></i> Username</label>
-        <input type="text" id="node-input-user" placeholder="Username">
+    <div class="form-row credentials">
+        <label for="node-input-username"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-input-username" placeholder="Username">
     </div>
-    <div class="form-row">
-        <label for="node-input-keyid"><i class="fa fa-key"></i> Key ID</label>
-        <input type="text" id="node-input-keyid" placeholder="Key ID">
+    <div class="form-row credentials">
+        <label for="node-input-password"><i class="fa fa-key"></i> Key ID</label>
+        <input type="text" id="node-input-password" placeholder="Key ID">
     </div>	
 </script>
 
