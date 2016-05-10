@@ -37,7 +37,6 @@ module.exports = function (RED) {
       });
       constrXML += "</LocationRQ>";
 
-
       this.status({fill:'blue', shape:'ring', text:'requesting'});
       request.post({
         headers: {'content-type' : 'text/xml'},

@@ -16,10 +16,13 @@
             "locationRQ": "skyhook/locationrq.js"
         }
     },
-    "contributors": [
-        "Arlemi Turpault <aturpaul@fr.ibm.com>"
-    ],
+    "author": 
+        { "name" : "Arlemi Turpault", 
+        "email" : "arlemi.turpault@gmail.com", 
+        "url" : "https://twitter.com/arlemi"
+        },
     "dependencies": {
         "request": "2.69.*"
-    }
+    },
+    "license" : "MIT"
 }
